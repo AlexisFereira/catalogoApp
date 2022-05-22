@@ -12,3 +12,8 @@ jobs:
       - name: Echo the message
         run: | 
           echo "Hola aleisi!"
+      - name: Dime la fecha
+        run: date
+      - name: Dime la fecha
+        run: ls -l
+        

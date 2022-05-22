@@ -1,0 +1,5 @@
+PORT=8000
+DB_CONECTION=mongodb+srv://alexis:hMB5BX0EVPEfzp3L@cluster1.0owb2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+JWT_SECRET=diogenes$$00
+GOOGLE_SECRET=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
+GOOGLE_CLIENT_ID=999184369550-qondhj3m1seqktnpfa3aak57gbcup7p3.apps.googleusercontent.com
