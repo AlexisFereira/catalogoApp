@@ -1,0 +1,25 @@
+extends layouts/main-layout.pug 
+
+block styles 
+  link(rel="stylesheet", href="/css/styles.css")
+  link(rel="stylesheet", href="/css/card.css")
+
+block content
+  section.headline
+    h1 My products
+    p list of all the products.
+  if prods.length > 0
+    .grid 
+      each product in prods
+        arcticle.card.productItem 
+          div.card_header 
+            h2.product_title #{product.title} 
+          .card-image 
+            img(src='/imagenes/'+ product.imagen +'.jpg',alt="el banner")
+          .card-content 
+            p.product-description #{product.description}
+            h2.product-price  $#{product.price}
+          .card-actions 
+            button.btn Add to cart   
+  else 
+    p Products not found.

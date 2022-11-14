@@ -1,0 +1,29 @@
+<main>
+  <section class="headline">
+    <h1>My products</h1>
+    <p>list of all the products...</p>
+    {{#if hasProducts}}
+    <div class="grid">
+      {{#each prods}}
+      <article class="productItem card">
+        <div class="card_header">
+          <h2 class="produc_title">{{ this.title }}</h2>
+        </div>
+        <div class="card-image">
+          <img src="/imagenes/{{ this.imagen }}.jpg" alt="">
+        </div>
+        <div class="card-content">
+          <p class="product-description">{{ this.description }}</p>
+          <h2 class="product-price">{{this.price}}</h2>
+        </div>
+        <div class="card-actions">
+          <button class="btn">Add to cart</button>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+    {{else}}
+      <p>No products found.</p>
+    {{/if}}
+  </section>
+</main>

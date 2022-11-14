@@ -1,0 +1,21 @@
+<header class="main-header">
+  <nav>
+    <ul class="menu">
+      <li <%if(active ==="shop")  {%> class="active" <%}%>>
+        <a href="/"><i class="fa fa-home"></i> Inicio</a>
+      </li>
+      <li <%if(active ==="add-product")  {%> class="active" <%}%>>
+        <a href="/admin/add-product"><i class="fa fa-plus"></i> Add Product</a>
+      </li>
+      <li <%if(active ==="admin")  {%> class="active" <%}%>>
+        <a href="/admin"><i class="fa fa-gear"></i> Admin</a>
+      </li>
+      <li <%if(active ==="cart")  {%> class="active" <%}%>>
+        <a href="/cart">
+          <i class="fa fa-cart-shopping"></i> Cart 
+          <% if (cart.length) {%> (<%= cart.length%>) <%}%>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

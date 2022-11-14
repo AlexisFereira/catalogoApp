@@ -1,0 +1,21 @@
+<%- include('../includes/head.ejs',{cart:cart}) %>
+    <link rel="stylesheet" href="/css/product.css" />
+  </head>
+  <body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(!!product){%>
+      <main>
+        <div class="product">
+          <h1><%= product.title %></h1>
+          <img src="/imagenes/<%= product.imagen %>.jpg" alt="">
+          <p><%= product.description %></p>
+          <h2 class="price">$<%= product.price %> COP</h2>
+          <button class="btn success">Add to cart</button>
+        </div>
+      </main>
+    <%} else {%>
+      <div class="product">
+        <h2>Product not found.</h2>
+      </div>
+    <% } %>
+<%- include('../includes/footer.ejs') %>

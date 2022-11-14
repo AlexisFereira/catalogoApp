@@ -1,0 +1,88 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <%- include('../includes/nav.ejs',{cart:cart}) %>
+
+    <main>
+      <div class="content">
+        <% if(products.length){%>
+          <h1>Products added to cart:</h1>
+            <% for(let product of products ) {%>
+              <div class="p-incart" id="<%= product.id%>">
+                <div class="image" style="background-image:url('/imagenes/<%= product.imagen%>.jpg')"></div>
+                <div class="title">
+                  <h3><%= product.title %></h3>
+                  <small>Price per unit: <strong>$<%= product.price %> COP</strong></small>
+                  <h4>Total: <span>$<%= product.total %> COP</span></h4>
+                </div>
+                <div class="actions">
+                  <button class="decrease"> - </button>
+                  <div class="amount">
+                    <%= product.amount %>
+                  </div>
+                  <button class="increase"> + </button>
+                </div>
+              </div>
+            <%}%>
+            <div class="total">
+              <p>Total artículos: <%= totalItems%></p>
+              <h3>Total a pagar: <span class="amount-text">$<%= total%> COP</span></h3>
+              
+            </div>
+            <div class="cont-btn-pagar">
+              <button class="btn success">  
+                Pagar
+              </button>
+            </div>
+          <%} else{%>
+            <div>
+              <h2>No products added to cart.</h2>
+            </div>
+         <%}%>
+      </div>
+    </main>
+    <script>
+      $(document).on('ready',function(){
+        
+         let handlerAmount =  async function(id,decrease,fn){
+          let url = `http://localhost:3000/cart/increase`
+          await fetch(url,{
+            method:"POST",
+            body:JSON.stringify({
+              "id":id,
+              "decrease":decrease
+            }),
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          }).then(response=>  response.json())
+          .then(data => {
+            const {amount} = data;
+            fn(amount)
+          })
+         }
+
+         $(".p-incart button").click( async function(e){
+            const current = $(e.target);
+            const id = current.parent().parent().attr('id');
+            const decrease = current.attr('class').includes('decrease'); 
+            const currentAmount = current.siblings('.amount')
+            $(`#${id} button`).attr('disabled',true)
+            let onfinish = function(amount){
+              $(`#${id} button`).attr('disabled',false);
+              console.log(typeof amount)
+              if(!amount){
+                window.location.reload()
+                return
+              }
+              currentAmount.empty()
+              currentAmount.text(amount)
+            }
+            let newAmount = await handlerAmount(id,decrease,onfinish);
+         })
+         
+      })
+    </script>
+
+<%- include('../includes/footer.ejs') %>

@@ -1,0 +1,7 @@
+### POST item in cart 
+POST http://localhost:3000/addToCart HTTP/1.1 
+Content-Type: application/json
+
+{
+    "id": "8"
+}

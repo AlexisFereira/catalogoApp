@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/card.css" />
+  </head>
+  <body>
+    <%- include('../includes/nav.ejs') %>
+
+    <main>
+      <section class="headline">
+        <h1 class="title">Admin pannel my products</h1>
+        <p>list of all the products...</p>
+      </section>
+        <% if(products.length) {%>
+          <div class="grid">
+               <% for (let product of products) {%>
+              <article class="productItem card">
+                <a  href="/product/<%= product.id %>">
+                <div class="card-image">
+                  <img src="/imagenes/<%= product.imagen %>.jpg" alt="">
+                </div>
+                <div class="card_header">
+                  <h2 class="produc_title"><%= product.title %></h2>
+                </div>
+                <div class="card-content">
+                  <p class="product-description"><%= product.description %></p>
+                  <h2 class="product-price"> $<%= product.price %> COP</h2>
+                </div>
+                </a>
+                <div class="card-actions">
+                  <button class="btn" onclick="editProduct('<%= product.id %>')">Edit</button>
+                  <button class="btn danger" onclick="deleteProduct('<%= product.id %>')">Delete</button>
+                </div>
+              </article>
+              <%}%>
+          </div>
+        <% } else { %>
+          <h2>Prdoducts not found.</h2>
+        <% }  %>
+     
+    </main>
+    <script>
+      let deleteProduct = async (id) =>{
+          const result = confirm('Do you confirm to delete this product ?')
+         if(result){
+          fetch('http://localhost:3000/admin/delete/'+id,{
+              method:"DELETE",
+              headers: {
+                  'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+              },
+          }).then(data => data.json())
+          .then(data => {
+            window.location.reload();
+          })
+         }
+      }
+
+      let editProduct = async (id) =>{
+          window.location.href = `/admin/edit/${id}`;
+      }
+    </script>
+
+<%- include('../includes/footer.ejs') %>

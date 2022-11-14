@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/form.css" />
+  </head>
+  <body>
+    <%- include('../includes/nav.ejs',{cart:cart}) %>
+    <main>
+      <form action="/admin/update-product" method="POST">
+        <h1>Edit product:</h1>
+        <fieldset>
+          <input type="hidden" name="id" value="<%= product.id%>">
+          <div class="form-control">
+            <label for="title">Title:</label> 
+            <input type="text" name="title" id="title" value="<%= product.title%>"/>
+          </div>
+          <div class="form-control">
+            <label for="price">Price:</label> 
+            <input type="text" name="price" id="price" value="<%= product.price%>"/>
+          </div>
+          <div class="form-control">
+            <label>Imagen de referencia:</label>
+            <select id="imagen" name="imagen" default="<%= product.imagen%>">
+              <option value=""
+              >Seleccione...</option>
+              <option 
+              <% if(product.imagen === 'banner'){%> selected <%}%> value="banner">banner</option>
+              <option 
+              <% if(product.imagen === 'banner1'){%>selected <%}%> value="banner">banner1</option>
+              <option 
+              <% if(product.imagen === 'banner2'){%>selected <%}%> value="banner2">banner2</option>
+              <option 
+                <% if(product.imagen === 'banner3'){%>selected <%}%> value="banner3">banner3</option>
+              <option 
+                <% if(product.imagen === 'banner4'){%> selected <%}%> value="banner4">banner4</option>
+            </select>
+          </div>
+          <div class="form-control">
+            <label>Description:</label> 
+            <textarea name="description" id="description"><%= product.description%></textarea>
+          </div>
+          <button type="submit" class="btn">Gurdar Cambios</button>
+        </fieldset>
+      </form>
+    </main>
+    
+<%- include('../includes/footer.ejs') %>
